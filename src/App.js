@@ -1,27 +1,29 @@
-import logo from './logo.svg';
 import React from 'react'
-import ReactDOM from 'react-dom'
-import './App.css';
-import "@aws-amplify/ui-react/styles.css";
-import {
-  withAuthenticator,
-  Button,
-  Heading,
-  Image,
-  View,
-  Card,
-} from "@aws-amplify/ui-react";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import './App.css'
+import LandingPage from './components:pages/LandingPage'
+import LoginPage from './components:pages/LoginPage'
+import RegisterPage from './components:pages/RegisterPage'
+import ForgetPasswordPage from './components:pages/ForgetPasswordPage'
+import HomePage from './components:pages/HomePage'
+import Form1 from './components:pages/Form1'
 
-function App({ signOut }) {
-  return (
-    <View className="App">
-      <Card>
-        <Image src={logo} className="App-logo" alt="logo" />
-        <Heading level={1}>We now have Auth!</Heading>
-      </Card>
-      <Button onClick={signOut}>Sign Out</Button>
-    </View>
-  );
+export default function App() {
+    return (
+        <Router>
+            <div>
+                <Switch>
+                    <Route exact path="/" component={ LandingPage } />
+                    <Route path="/login" component={ LoginPage } />
+                    <Route path="/register" component={ RegisterPage } />
+                    <Route path="/forget-password" component={ ForgetPasswordPage } />
+                    <Route path="/home" component={ HomePage } />
+                    <Route path="/form1" component = { Form1 } />
+                </Switch>
+            </div>
+        </Router>
+    )
 }
 
-export default withAuthenticator(App);
+
+
