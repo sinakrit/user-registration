@@ -36,6 +36,10 @@ export default function SignUpPage() {
                         <input type="password" name="password" requiredc />
                     </p>
                     <p><br/>
+                        <label> Confirm Password </label><br/>
+                        <input type="password" name="password" requiredc />
+                    </p>
+                    <p><br/>
                     <label class="custom-file-label" for="inputGroupFile01"> Upload a picture </label><br/>
                     <input type="file" className="custom-file-input" name="file" inputProps={{ accept: "image/*" }} id="inputGroupFile01"/>
                     </p>
@@ -66,7 +70,7 @@ const abc = {
 }
 const av = {
     textAlign: "left",
-    height: "80vh"
+    height: "auto"
 }
 const ax = {
     height: "40vh",

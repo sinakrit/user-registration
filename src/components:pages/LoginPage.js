@@ -26,7 +26,7 @@ export default function SignInPage() {
                 
             </form>
             <footer>
-                <p>Don't have account? <Link to="/register">Create an account</Link></p>
+                <p>Don't have account? <Link to="/register1">Create an account</Link></p>
                 <p><Link to="/">Back to Homepage</Link></p>
             </footer>
         </div>
