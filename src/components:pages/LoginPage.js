@@ -9,25 +9,25 @@ export default function SignInPage() {
         <div style= {ab}>
             <h2 className="main-para text-center" style= {abc}> Sign in to us</h2>
             <form action="/home">
-                <p>
+                <div>
                     <label>Username or Email address</label><br/>
                     <input type="text" name="first_name" required />
-                </p>
-                <p><br/>
+                </div><br/>
+                <div>
                     <label>Password</label><br/>
-                    <input type="password" name="password" required />
-                </p>
-                <p><br/>
+                    <input type="password" name="password" required autocomplete="on"/>
+                </div><br/>
+                <div>
                     <button id="sub_btn" type="submit">Login</button>
-                </p>
-                <p><br/>
+                </div>
+                <div>
                 <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
-                </p>
+                </div>
                 
             </form>
             <footer>
-                <p>Don't have account? <Link to="/register1">Create an account</Link></p>
-                <p><Link to="/">Back to Homepage</Link></p>
+                <div>Don't have account? <Link to="/register1">Create an account</Link></div>
+                <div><Link to="/">Back to Homepage</Link></div>
             </footer>
         </div>
     )

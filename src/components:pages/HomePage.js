@@ -24,6 +24,6 @@ const aaa = {
     textAlign: "center"
 }
 const f= {
-    paddingTop: "50px"
+    paddingTop: "auto"
      
 }

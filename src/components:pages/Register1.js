@@ -1,163 +1,176 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { createUser } from '../adapter/api'
+import { useHistory } from "react-router"
 import Form1 from './Form1'
 import BackgroundImage from '../assets:images/bg.png'
+import { Auth } from 'aws-amplify';
 
-class Form extends React.Component {
-    state = {
-        username: '',
-        email: '',
-        date: '',
-        phone: '',
-        password: '',
-        confirmpassword: '',
-        errors: {},
-      }
+const Form = () =>  {
+     const [name, setName] = useState('')
+     const [username, setEmail] = useState('')
+     const [date, setDate] = useState('')
+     const [phone, setPhone] = useState('')
+     const [password, setPassword] = useState('')
+     const [confirmpassword, setConfirmpassword] = useState('') 
+     //const [errors, setErrors] = useState({})
+
+    //  const handleChange = (e) => {
+    //   setUsername(
+    //     e.target.value
+    //   )
+    // }
+
+// const [validation, setValidation] = useState({
+//         name: "",
+//         username: "",
+//         date: "",
+//         phone: "",
+//         password: "",
+//         confirmpassword: "",
+//       });
     
-      handleChange = (e) => {
-        this.setState({
-          [e.target.name]: e.target.value
-        })
-      }
-    
-     handleSubmit = (e) => {
-        e.preventDefault()
-        if (this.validateForm()) {
-          console.log(this.state)
-          createUser(this.state)
-          .then(res => {
-            if(res.error) {
-              let errors = {}
-              console.log("Response", res)
-              console.log("Res ERR:", res.error)
-              if (res.error === "*Username already exists"){
-                errors['username'] = res.error
-              }else {
-                errors['email'] = res.error
+  const history = useHistory();
+  async function signUp() {
+      try {
+          const { user } = await Auth.signUp({
+              username, //email
+              password,
+              attributes: {
+                  //email,
+                    // optional - E.164 number convention
+                  // other custom attributes 
+              },
+              autoSignIn: { // optional - enables auto sign in after user is confirmed
+                  enabled: true,
               }
-              this.setState({ errors })
-            }else {
-              console.log("USER SUCCESSFULLY CREATED")
-              console.log("Response", res)  // is a token
-              this.props.handleLogin(res)
-            }
-          })
-        }
+          });
+          console.log(user);
+          history.push('/home')
+      } catch (error) {
+          console.log('error signing up:', error);
       }
+  }
+  
     
-      validateForm = () => {
-        let errors = {}
-        let formIsValid = true
+  const  handleSubmit = (e) => {
+         e.preventDefault()
+         //if (validateForm()) {
+           //console.log(e)
+          
+       //}
+       signUp()
+    }
+    //Form validation Checking
+//   
+
+      // validateForm = () => {
+      //   let errors = {}
+      //   let formIsValid = true
     
-        if (!this.state.username) {
-          formIsValid = false
-          errors['username'] = '*Please enter your username'
-        }
+      //   if (!this.state.username) {
+      //     formIsValid = false
+      //     errors['username'] = '*Please enter your username'
+      //   }
     
-        if (this.state.username) {
-          if (!this.state.username.match(/^\w+$/)) {
-            formIsValid = false
-            errors['username'] = '*Please use alphanumeric characters only'
-          }
-        }
+      //   if (this.state.username) {
+      //     if (!this.state.username.match(/^\w+$/)) {
+      //       formIsValid = false
+      //       errors['username'] = '*Please use alphanumeric characters only'
+      //     }
+      //   }
     
-        if (!this.state.email) {
-          formIsValid = false
-          errors['email'] = '*Please enter your email'
-        }
+      //   if (!this.state.email) {
+      //     formIsValid = false
+      //     errors['email'] = '*Please enter your email'
+      //   }
     
-        if (this.state.email) {
-          //regular expression for email validation
-          let pattern = new RegExp(/^(('[\w-\s]+')|([\w-]+(?:\.[\w-]+)*)|('[\w-\s]+')([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-          if (!pattern.test(this.state.email)) {
-            formIsValid = false
-            errors['email'] = '*Please enter valid email'
-          }
-        }
-        if (!this.state.date) {
-            formIsValid = false
-            errors['date'] = '*Please select a date'
-          }
-        if (!this.state.phone) {
-            formIsValid = false
-            errors['phone'] = '*Please enter a phone number'
-          }
-        if (this.state.phone) {
-            if (!this.state.phone.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/)) {
-            formIsValid = false
-            errors['phone'] = '*Please enter a valid phone number'
-          }
-        }
+      //   if (this.state.email) {
+      //     //regular expression for email validation
+      //     let pattern = new RegExp(/^(('[\w-\s]+')|([\w-]+(?:\.[\w-]+)*)|('[\w-\s]+')([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      //     if (!pattern.test(this.state.email)) {
+      //       formIsValid = false
+      //       errors['email'] = '*Please enter valid email'
+      //     }
+      //   }
+      //   if (!this.state.date) {
+      //       formIsValid = false
+      //       errors['date'] = '*Please select a date'
+      //     }
+      //   if (!this.state.phone) {
+      //       formIsValid = false
+      //       errors['phone'] = '*Please enter a phone number'
+      //     }
+      //   if (this.state.phone) {
+      //       if (!this.state.phone.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/)) {
+      //       formIsValid = false
+      //       errors['phone'] = '*Please enter a valid phone number'
+      //     }
+      //   }
     
-        if (!this.state.password) {
-          formIsValid = false
-          errors['password'] = '*Please enter your password'
-        }
+      //   if (!this.state.password) {
+      //     formIsValid = false
+      //     errors['password'] = '*Please enter your password'
+      //   }
     
-        if (this.state.password) {
-          if (!this.state.password.match(/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}).*$/)) {
-            formIsValid = false
-            errors['password'] = '*Please enter secure and strong password'
-          }
-        }
+      //   if (this.state.password) {
+      //     if (!this.state.password.match(/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,}).*$/)) {
+      //       formIsValid = false
+      //       errors['password'] = '*Please enter secure and strong password'
+      //     }
+      //   }
         
-        if (!this.state.confirmpassword) {
-              formIsValid = false
-              errors['confirmpassword'] = '*Please confirm the password'
-          }
+      //   if (!this.state.confirmpassword) {
+      //         formIsValid = false
+      //         errors['confirmpassword'] = '*Please confirm the password'
+      //     }
         
-        if (this.state.confirmpassword) {
-            if (this.state.password !== this.state.confirmpassword) {
-              formIsValid = false
-              errors['confirmpassword'] = '*Password does not match'
-            }
-          }
+      //   if (this.state.confirmpassword) {
+      //       if (this.state.password !== this.state.confirmpassword) {
+      //         formIsValid = false
+      //         errors['confirmpassword'] = '*Password does not match'
+      //       }
+      //     }
     
-        this.setState({ errors })
+      //   this.setState({ errors })
     
-        return formIsValid
-      }
-    
-      render() {
-    
-        const { username, email, phone, password, confirmpassword } = this.state
+      //   return formIsValid
+      // }
     
         return (
-        <div style={abc} onSubmit={this.handleSubmit}>
+        <div style={abc}>
         <h2 className="main-para text-center">Sign Up</h2>
         <h5 className="main-para text-center">Create your account</h5>
-        <form style={av}>
-            <div >
+        <form style={av} onSubmit={handleSubmit}>
+            <div className='mb-3'>
                 <label> Username </label><br/>
-                <input type="text" className="input" name='username' value={username} onChange={this.handleChange}/>
-                <div className='errorMsg'>{this.state.errors.username}</div>
+                <input type="text" className="input" placeholder="Name" name='username' value={name} onChange={(e) => setName(e.target.value)}/>
+                
             </div><br/>
             <div>
                 <label>Email Address</label><br/>
-                <input type="email" name="email" placeholder="user@gmail.com" className="input" value={email} onChange={this.handleChange} />
-                <div className='errorMsg'>{this.state.errors.email}</div>
+                <input type="email" name="email" placeholder="user@gmail.com" className="input" value={username} onChange={(e) => setEmail(e.target.value)}/>
+                
             </div><br/>
             <div>
                 <label>DOB</label><br/>
-                <Form1 name = "date" value={email} onChange={this.handleChange}/>
-                <div className='errorMsg'>{this.state.errors.date}</div>
+                <Form1 name = "date" value={date} placeholder="DD/MM/YYYY" onChange={(e) => setDate(e.target.value)}/>
+                
             </div><br/>
             <div>
                 <label> Phone </label><br/>
-                <input type="phone" name="phone" placeholder="(xxx)xxx-xxxx" value = {phone} className="input" onChange={this.handleChange} />
-                <div className='errorMsg'>{this.state.errors.phone}</div>
+                <input type="phone" name="phone" placeholder="(xxx)xxx-xxxx" value = {phone} className="input" onChange={(e) => setPhone(e.target.value)} />
+                
             </div><br/>
             <div>
                 <label> Password </label><br/>
-                <input type="password" name="password" className="input" value={password} onChange={this.handleChange} />
-                <div className='errorMsg'>{this.state.errors.password}</div>
+                <input type="password" name="password" className="input" value={password} autocomplete="on" onChange={(e) => setPassword(e.target.value)} />
+                
             </div><br/>
             
             <div>
                 <label> Confirm Password </label><br/>
-                <input type="password" name="confirmpassword" className="input" value={confirmpassword} onChange={this.handleChange} />
-                <div className='errorMsg'>{this.state.errors.confirmpassword}</div>
+                <input type="password" name="confirmpassword" className="input" value={confirmpassword} autocomplete="on" onChange={(e) => setConfirmpassword(e.target.value)} />
+                
             </div><br/>
             
             <div>
@@ -177,8 +190,8 @@ class Form extends React.Component {
     </div>
 
     )
-  }
-}
+        }
+ 
 export default Form;
 
 const abc = {
