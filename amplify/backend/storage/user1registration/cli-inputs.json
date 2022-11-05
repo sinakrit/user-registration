@@ -1,0 +1,14 @@
+{
+  "resourceName": "user1registration",
+  "policyUUID": "92e72727",
+  "bucketName": "userregistration0272231974784ee8b4ee875777e87bc",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

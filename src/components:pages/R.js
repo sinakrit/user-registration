@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom'
 import { useHistory } from "react-router"
 import Form1 from './Form1'
 import BackgroundImage from '../assets:images/bg.png'
-import { Auth } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Form = () =>  {
     const [inputValues, setInputValue] = useState({
         name1: '',
         email: '',
-        date: "",
         phone: "",
         password: '',
         confirmpassword: '',
       });
-
+    const [startDate, setStartDate] = useState(new Date());
     const [validation, setValidation] = useState({
         name1: "",
         email: "",
-        date: "",
         phone: "",
         password: "",
         confirmpassword: "",
@@ -41,40 +41,44 @@ const Form = () =>  {
   async function signUp() {
     const username = inputValues.email;
     const password = inputValues.password;
+    const given_name = inputValues.name1;
+    const phone_number = inputValues.phone;
+   
+    //const picture = inputValues.picture;
       try {
           const { user } = await Auth.signUp({
             username,    //email
             password,
               attributes: {
-                  //email,
-                    // optional - E.164 number convention
-                  // other custom attributes 
+                given_name,
+                phone_number,
+                'custom:date_key': startDate
+                
               },
               autoSignIn: { // optional - enables auto sign in after user is confirmed
                   enabled: true,
               }
           });
           console.log(user);
+          
           history.push('/home')
       } catch (error) {
           console.log('error signing up:', error);
       }
   }
-  
+ 
     
   const  handleSubmit = (e) => {
          e.preventDefault()
          if (checkValidation()) {
-           //console.log(e)
            signUp()
           
        }
        
     }
+
    const checkValidation = () => {
         let errors = JSON.parse(JSON.stringify(validation));
-        //let formIsValid = true
-        //first Name validation
         if (!inputValues.name1.trim()) {
           errors.name1 = "*First name is required";
           setValidation(errors);
@@ -97,7 +101,7 @@ const Form = () =>  {
         } else {
           errors.email = "";
         }
-        //Date
+        //Phone
         const phoneCond = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
         if (!inputValues.phone.trim()) {
             //formIsValid = false
@@ -163,6 +167,8 @@ const Form = () =>  {
         setValidation({errors: ""});
         return true;
       };
+
+     
     
         return (
         <div style={abc}>
@@ -181,7 +187,7 @@ const Form = () =>  {
                 {validation.email && <p>{validation.email}</p>}
             <div className='mb-3'>
                 <label>DOB</label><br/>
-                <Form1 name = "date" value={inputValues.date} placeholder="DD/MM/YYYY" onChange={(e) => handleChange(e)}/>
+                <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} onChange={(date) => setStartDate(date)}/>
                 </div>
                 
             <div className='mb-3'>

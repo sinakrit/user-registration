@@ -26,5 +26,12 @@
         ]
       }
     }
+  },
+  "storage": {
+    "user1registration": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

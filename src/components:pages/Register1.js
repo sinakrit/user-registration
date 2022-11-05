@@ -153,7 +153,7 @@ const Form = () =>  {
             </div><br/>
             <div>
                 <label>DOB</label><br/>
-                <Form1 name = "date" value={date} placeholder="DD/MM/YYYY" onChange={(e) => setDate(e.target.value)}/>
+                <Form1 value={date} onChange={(e) => setDate(e.target.value)}/>
                 
             </div><br/>
             <div>
