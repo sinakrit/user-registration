@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router"
-import Form1 from './Form1'
 import BackgroundImage from '../assets:images/bg.png'
-import { Auth, Storage } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -208,10 +207,7 @@ const Form = () =>  {
                 
             </div>
             {validation.confirmpassword && <p>{validation.confirmpassword}</p>}
-            <div>
-            <label class="custom-file-label" for="inputGroupFile01"> Upload a picture </label><br/>
-            <input type="file" className="custom-file-input" name="file" inputProps={{ accept: "image/*" }} id="inputGroupFile01"/>
-            </div>
+           
             <div>
                 <input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree all statements in <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a></span>.
             </div>

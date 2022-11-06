@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Auth } from 'aws-amplify';
-import '../App.css'
 import BackgroundImage from '../assets:images/bg.png'
+import { useHistory } from "react-router"
 
 const SignInPage = () =>  {
 
@@ -10,6 +10,8 @@ const SignInPage = () =>  {
         email: '',
         password: '',
       });
+    
+    const history = useHistory();
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -21,6 +23,7 @@ const SignInPage = () =>  {
         try {
             const user = await Auth.signIn(username, password);
             console.log(user)
+            history.push('/A')
         } catch (error) {
             console.log('error signing in', error);
         }

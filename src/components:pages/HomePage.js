@@ -5,7 +5,7 @@ import { Auth, Storage } from 'aws-amplify';
 
 export default function HomePage() {
 
-    //const [user, setUser] = useState('')
+  
 
     async function uploadPhoto(e) {
 
@@ -13,12 +13,12 @@ export default function HomePage() {
         
          const file = e.target.files[0];
          try {
-           await Storage.put(`${user.attributes.given_name}.png`, file, {
+           await Storage.put(`${user.attributes.email}.png`, file, {
              contentType: "image/png",
            });
            console.log("Photo uploaded")
            let result = await Auth.updateUserAttributes(user, {
-            'custom:picture_key': `${user.attributes.given_name}.png`
+            'custom:picture_key': `${user.attributes.email}.png`
         });
         console.log(result);
         } catch (error) {
@@ -34,20 +34,16 @@ export default function HomePage() {
         }
     return (
         <div className="text-center" style= {aaa}>
-            <form onSubmit={handleSubmit}></form>
-            <h2 className="main-para text-center" style = {f}>Your Account has been created!</h2>
-            <h2 className="main-para text-center">You may now Login</h2>
-            <div>
-            <label class="custom-file-label"> Upload a picture </label><br/>
-            <input type="file" className="custom-file-input" name="file" inputProps={{ accept: "image/*" }} onChange={uploadPhoto}/>
-            </div>
-            <div><br/>
-            <button id="sub_btn" type="submit" value='Sign Up'>Upload</button>
-            </div>
-            <form/>
-            {/* /* <Link to="/login">
-                <button className="primary-button">Login</button>
-    </Link> */ }
+                <h2 className="main-para text-center">Your Account has been created!</h2>
+                <h2 className="main-para text-center">Choose a picture to Upload</h2>
+                <form onSubmit={handleSubmit}>
+                <div>
+                    <input type="file" className="custom-file-input" name="file" inputProps={{ accept: "image/*" }} onChange={uploadPhoto}/>
+                </div>
+                <div><br/>
+                    <button id="sub_btn" type="submit" value='Sign Up'>Upload</button>
+                </div>
+            </form>
         </div>
     )
 }
@@ -62,6 +58,6 @@ const aaa = {
     textAlign: "center"
 }
 const f= {
-    paddingTop: "auto"
-     
+   
+    textAlign: "center"
 }

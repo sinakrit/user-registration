@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router"
-import Form1 from './Form1'
+//import Form1 from './Form1'
 import BackgroundImage from '../assets:images/bg.png'
 import { Auth } from 'aws-amplify';
 
@@ -151,11 +151,7 @@ const Form = () =>  {
                 <input type="email" name="email" placeholder="user@gmail.com" className="input" value={username} onChange={(e) => setEmail(e.target.value)}/>
                 
             </div><br/>
-            <div>
-                <label>DOB</label><br/>
-                <Form1 value={date} onChange={(e) => setDate(e.target.value)}/>
-                
-            </div><br/>
+           
             <div>
                 <label> Phone </label><br/>
                 <input type="phone" name="phone" placeholder="(xxx)xxx-xxxx" value = {phone} className="input" onChange={(e) => setPhone(e.target.value)} />
