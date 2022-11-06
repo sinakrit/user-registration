@@ -2,10 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import BackgroundImage from '../assets:images/bg.png'
 import { Auth, Storage } from 'aws-amplify';
+import { useHistory } from "react-router"
 
 export default function HomePage() {
 
-  
+    const history = useHistory();
 
     async function uploadPhoto(e) {
 
@@ -30,6 +31,7 @@ export default function HomePage() {
         
       const  handleSubmit = (e) => {
              e.preventDefault()
+             history.push('/S')
                
         }
     return (
