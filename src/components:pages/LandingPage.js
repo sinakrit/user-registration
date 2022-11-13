@@ -1,8 +1,5 @@
 import React from 'react'
 import {  Link } from 'react-router-dom'
-
-
-import '../App.css'
 import BackgroundImage from '../assets:images/bg.png'
 
 export default function LandingPage() {
@@ -14,7 +11,7 @@ export default function LandingPage() {
                     <Link to ="/login">
                         <button className="primary-button">LogIn</button>
                     </Link>
-                    <Link to ="/r1">
+                    <Link to ="/register">
                         <button className="primary-button" id="reg_btn"><span>Register </span></button>
                     </Link>
             </div>

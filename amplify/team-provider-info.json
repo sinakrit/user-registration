@@ -17,6 +17,15 @@
       },
       "storage": {
         "user1registration": {}
+      },
+      "function": {
+        "AdminQueries038ba59f": {
+          "deploymentBucketName": "amplify-amplify92a1abf63e864-staging-85305-deployment",
+          "s3Key": "amplify-builds/AdminQueries038ba59f-714a3353685932346830-build.zip"
+        }
+      },
+      "api": {
+        "AdminQueries": {}
       }
     }
   }

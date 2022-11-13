@@ -10,7 +10,6 @@ const SignInPage = () =>  {
         email: '',
         password: '',
       });
-    
     const history = useHistory();
 
     function handleChange(event) {
@@ -23,7 +22,14 @@ const SignInPage = () =>  {
         try {
             const user = await Auth.signIn(username, password);
             console.log(user)
-            history.push('/A')
+            try{
+            if(user.signInUserSession.idToken.payload["cognito:groups"][0]=='Admin'){
+                history.push('/admin')
+            }
+            }
+            catch (error) {
+                history.push('/Afterlogin')
+            }
         } catch (error) {
             console.log('error signing in', error);
         }
@@ -37,8 +43,8 @@ const SignInPage = () =>  {
 
  
     return (
-        <div style= {ab}>
-            <h2 className="main-para text-center" style= {abc}> Sign in to us</h2>
+        <div style= {pagestyling}>
+            <h2 className="main-para text-center" style= {headerstyling}> Sign in to us</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Email Address</label><br/>
@@ -65,7 +71,7 @@ const SignInPage = () =>  {
 }
 export default SignInPage;
 
-const ab = {
+const pagestyling = {
     width: "100%",
     height: "200vh",
     background: `url(${BackgroundImage})`,
@@ -75,6 +81,6 @@ const ab = {
     textAlign: "center"
 }
 
-const abc = {
+const headerstyling = {
     paddingTop: "auto",
 }

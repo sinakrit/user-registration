@@ -8,6 +8,8 @@ import Register1 from './components:pages/Register1'
 import R from './components:pages/R'
 import Afterlogin from './components:pages/Afterlogin'
 import Success from './components:pages/Success'
+import Adminlogin from './components:pages/Adminlogin'
+
 
 
 export default function App() {
@@ -19,10 +21,11 @@ export default function App() {
                     <Route path="/login" component={ LoginPage } />
                     <Route path="/forget-password" component={ ForgetPasswordPage } />
                     <Route path="/home" component={ HomePage } />
-                    <Route path="/r1" component = { R } />
+                    <Route path="/register" component = { R } />
                     <Route path="/register1" component = { Register1 } />
-                    <Route path="/A" component = { Afterlogin } />
+                    <Route path="/Afterlogin" component = { Afterlogin } />
                     <Route path="/S" component = { Success } />
+                    <Route path="/admin" component = { Adminlogin } />
                 </Switch>
             </div>
         </Router>

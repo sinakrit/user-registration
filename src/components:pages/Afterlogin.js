@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { Auth, Storage } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import { useHistory } from "react-router"
+import BackgroundImage from '../assets:images/bg.png'
 
 const Afterlogin = () =>  {
 
-    const [ att, updateAtt ] = useState([])
+    const [ att, updateAttributes ] = useState([])
     const [key, updateKey] = useState('')
     
     const history = useHistory();
-    async function XX() {
+    async function getDetails() {
     let  user = await Auth.currentAuthenticatedUser();
 
     const { attributes } = user; 
-    updateAtt(attributes) 
+    updateAttributes(attributes) 
     const a = await Storage.get(`${user.attributes.email}.png`)
      updateKey(a)
      console.log(a)
@@ -21,7 +22,7 @@ const Afterlogin = () =>  {
 
     useEffect(() => {
         console.log('Select Screen loaded.')
-       XX()
+        getDetails()
       }, [])
 
       async function signOut() {
@@ -41,16 +42,12 @@ const Afterlogin = () =>  {
 
     return (
         
-         <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
+         <div style={pagestyling }>
             <form onSubmit={handleSubmit}>
             <h1>User Details</h1>
             <p>Name: {att.given_name}</p>
             <p>Email Address: {att.email}</p>
-            <img src={key} alt="Girl in a jacket" width="70" height="80"></img>
+            <img src={key} alt="Girl in a jacket" width="80" height="100"></img>
             <div><br/>
             <button id="sub_btn" type="submit">SignOut</button>
             </div>
@@ -60,4 +57,19 @@ const Afterlogin = () =>  {
 
 }
 export default Afterlogin;
+
+const pagestyling = {
+    width: "100%",
+    height: "200vh",
+    background: `url(${BackgroundImage})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    textAlign: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: "50px"
+  }
+  
+  
 

@@ -6,6 +6,7 @@ import { Auth } from 'aws-amplify';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 const Form = () =>  {
     const [inputValues, setInputValue] = useState({
         name1: '',
@@ -175,34 +176,34 @@ const Form = () =>  {
         <h5 className="main-para text-center">Create your account</h5>
         <form style={av} onSubmit={handleSubmit}>
             <div className='mb-3'>
-                <label> Username </label><br/>
+                <label> Username *</label><br/>
                 <input type="text" className="input" placeholder="Name" name='name1' value={inputValues.name1} onChange={(e) => handleChange(e)}/>
                 </div>
                 {validation.name1 && <p>{validation.name1}</p>}
             <div className='mb-3'>
-                <label>Email Address</label><br/>
+                <label>Email Address *</label><br/>
                 <input type="email" name="email" placeholder="Email"  value={inputValues.email} onChange={(e) => handleChange(e)}/>
             </div>
                 {validation.email && <p>{validation.email}</p>}
             <div className='mb-3'>
-                <label>DOB</label><br/>
+                <label>DOB *</label><br/>
                 <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} onChange={(date) => setStartDate(date)}/>
                 </div>
                 
             <div className='mb-3'>
-                <label> Phone </label><br/>
+                <label> Phone *</label><br/>
                 <input type="phone" name="phone" placeholder="(xxx)xxx-xxxx" value = {inputValues.phone} className="input" onChange={(e) => handleChange(e)} />
                 
             </div>
             {validation.phone && <p>{validation.phone}</p>}
             <div className='mb-3'>
-                <label> Password </label><br/>
+                <label> Password *</label><br/>
                 <input type="password" name="password" className="input" value={inputValues.password} autocomplete="on" onChange={(e) => handleChange(e)} />
                 
             </div>
             {validation.password && <p>{validation.password}</p>}
             <div className='mb-3'>
-                <label> Confirm Password </label><br/>
+                <label> Confirm Password *</label><br/>
                 <input type="password" name="confirmpassword" className="input" value={inputValues.confirmpassword} autocomplete="on" onChange={(e) => handleChange(e)} />
                 
             </div>

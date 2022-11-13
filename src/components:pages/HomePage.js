@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import BackgroundImage from '../assets:images/bg.png'
 import { Auth, Storage } from 'aws-amplify';
 import { useHistory } from "react-router"
