@@ -57,7 +57,7 @@ function Adminlogin() {
   return (
 
     <div style={pagestyling}>
-      <h1>List of Registered Users</h1>
+      <h1>List of Registered Users</h1><br/><br/>
       <table style={{
         borderWidth: '1px', borderColor: '#aaaaaa', borderStyle: 'solid', marginLeft: 'auto', marginRight: 'auto',
       }}

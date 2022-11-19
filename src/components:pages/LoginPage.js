@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router';
 import BackgroundImage from '../assets:images/bg.png';
+// import { Logger, injectLambdaContext } from '@aws-lambda-powertools/logger';
+// import middy from '@middy/core';
 
 function SignInPage() {
   const [inputValues, setInputValue] = useState({

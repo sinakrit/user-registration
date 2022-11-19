@@ -52,7 +52,7 @@ function Afterlogin() {
           Email Address:
           {att.email}
         </p>
-        <img src={key} alt="Girl in a jacket" width="80" height="100" />
+        <img src={key} alt="Girl in a jacket"  width="70" height="80"/>
         <div>
           <br />
           <button id="sub_btn" type="submit">SignOut</button>

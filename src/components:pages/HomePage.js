@@ -1,17 +1,30 @@
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { useState } from 'react';
 import { Auth, Storage } from 'aws-amplify';
 import { useHistory } from 'react-router';
 import BackgroundImage from '../assets:images/bg.png';
 
 export default function HomePage() {
-  const history = useHistory();
+  
+  const [file, setImage] = useState('');  
+  const [previewImage, setPreviewImage] = useState();  
+  const fileUploadHandler = (e) => {
+    const url = e.target.files[0];
+    setImage(url);
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(url);
+    fileReader.onload = () => {
+        setPreviewImage(fileReader.result);
+    };
+};
 
+
+  const history = useHistory();
   async function uploadPhoto(e) {
     const user = await Auth.currentAuthenticatedUser();
 
-    const file = e.target.files[0];
+    //const file = e.target.files[0];
     try {
       await Storage.put(`${user.attributes.email}.png`, file, {
         contentType: 'image/png',
@@ -29,6 +42,7 @@ export default function HomePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    uploadPhoto(e)
     history.push('/Success');
   };
   return (
@@ -37,8 +51,9 @@ export default function HomePage() {
       <h2 className="main-para text-center">Choose a picture to Upload</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <input type="file" className="custom-file-input" name="file" accept="image/png, image/jpeg" onChange={uploadPhoto} />
+          <input type="file" className="custom-file-input" name="file" accept="image/png, image/jpeg" onChange={fileUploadHandler} />
         </div>
+        {file && <img src={previewImage} width="50" height="50"/>}
         <div>
           <br />
           <button id="sub_btn" type="submit" value="Sign Up">Upload</button>

@@ -94,7 +94,7 @@ function Form() {
       return false;
     } if (!inputValues.email.match(emailCond)) {
       // formIsValid = false
-      errors.email = '*Please ingress a valid email address';
+      errors.email = '*Please input a valid email address';
       setValidation(errors);
       return false;
     }
@@ -116,7 +116,7 @@ function Form() {
     errors.date = '';
 
     // Phone
-    const phoneCond = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    const phoneCond = /^\+(?:[0-9] ?){6,14}[0-9]$/;  
     if (!inputValues.phone.trim()) {
       // formIsValid = false
       errors.phone = '*Phone Number is required';
@@ -124,7 +124,7 @@ function Form() {
       return false;
     } if (!inputValues.phone.match(phoneCond)) {
       // formIsValid = false
-      errors.phone = '*Please ingress a valid phone number';
+      errors.phone = '*Please input a valid phone number';
       setValidation(errors);
       return false;
     }
@@ -205,7 +205,6 @@ function Form() {
           <label> Phone *</label>
           <br />
           <input type="phone" name="phone" placeholder="(xxx)xxx-xxxx" value={inputValues.phone} className="input" onChange={(e) => handleChange(e)} />
-
         </div>
         {validation.phone && <p>{validation.phone}</p>}
         <div className="mb-3">
@@ -228,7 +227,7 @@ function Form() {
           {' '}
           <span>
             I agree all statements in
-            <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a>
+            <a href="https://google.com" target="_blank" rel="noopener noreferrer"> terms of service</a>
           </span>
           .
         </div>
