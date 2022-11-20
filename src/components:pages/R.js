@@ -184,7 +184,7 @@ function Form() {
       <h5 className="main-para text-center">Create your account</h5>
       <form style={av} onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label> Username *</label>
+          <label> Name *</label>
           <br />
           <input type="text" className="input" placeholder="Name" name="name1" value={inputValues.name1} onChange={(e) => handleChange(e)} />
         </div>
