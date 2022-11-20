@@ -108,8 +108,8 @@ function Form() {
       return false;
     }
     const year = startDate.getFullYear()
-    if(year>2004){
-      errors.date = '*Age should be greater than 18 years';
+    if(year>2004 || year < 1952){
+      errors.date = '*Age should be greater than 18 and less than 70 years';
       setValidation(errors);
       return false;
     }
