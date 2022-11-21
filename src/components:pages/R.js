@@ -79,7 +79,7 @@ function Form() {
   const checkValidation = () => {
     const errors = JSON.parse(JSON.stringify(validation));
     if (!inputValues.name1.trim()) {
-      errors.name1 = '*First name is required';
+      errors.name1 = '*Name is required';
       setValidation(errors);
       return false;
     }
