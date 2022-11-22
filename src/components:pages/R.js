@@ -46,7 +46,6 @@ function Form() {
     const given_name = inputValues.name1;
     const phone_number = inputValues.phone;
 
-    // const picture = inputValues.picture;
     try {
       const { user } = await Auth.signUp({
         username, // email
@@ -57,7 +56,7 @@ function Form() {
           'custom:date_key': startDate,
 
         },
-        autoSignIn: { // optional - enables auto sign in after user is confirmed
+        autoSignIn: { 
           enabled: true,
         },
       });
@@ -179,10 +178,10 @@ function Form() {
   };
 
   return (
-    <div style={abc}>
+    <div style={pagestyling}>
       <h2 className="main-para text-center">Sign Up</h2>
       <h5 className="main-para text-center">Create your account</h5>
-      <form style={av} onSubmit={handleSubmit}>
+      <form style={pagestyle2} onSubmit={handleSubmit}>
         <div className="mb-3">
           <label> Name *</label>
           <br />
@@ -246,7 +245,7 @@ function Form() {
 
 export default Form;
 
-const abc = {
+const pagestyling = {
   width: '100%',
   height: '200vh',
   background: `url(${BackgroundImage})`,
@@ -256,7 +255,7 @@ const abc = {
   textAlign: 'center',
   paddingTop: '50px',
 };
-const av = {
+const pagestyle2 = {
   textAlign: 'left',
   height: 'auto',
 };
